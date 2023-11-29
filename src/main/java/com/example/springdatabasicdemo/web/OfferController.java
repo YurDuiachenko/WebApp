@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.controllers;
+package com.example.springdatabasicdemo.web;
 
 import com.example.springdatabasicdemo.services.dtos.OfferDto;
 import com.example.springdatabasicdemo.exeptions.OfferNotFoundExeption;
@@ -10,34 +10,34 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-//@RequestMapping("/offers")
+@RequestMapping("/offers")
 public class OfferController {
 
     private OfferService offerService;
 
     public OfferController() {}
 
-    @GetMapping("/offers")
+    @GetMapping("/all")
     Iterable<OfferDto> all() {
         return offerService.getAll();
     }
 
-    @GetMapping("/offers/{id}")
+    @GetMapping("/{id}")
     Optional<OfferDto> get(@PathVariable UUID id) {
         return Optional.ofNullable(offerService.find((id)).orElseThrow(() -> new OfferNotFoundExeption(id)));
     }
 
-    @DeleteMapping("/offers/{id}")
+    @DeleteMapping("/{id}")
     void delete(@PathVariable UUID id) {
         offerService.destroyById(id);
     }
 
-    @PutMapping("/offers")
+    @PutMapping("/update")
     OfferDto update(@RequestBody OfferDto offer) {
         return offerService.create(offer);
     }
 
-    @PostMapping("/offers")
+    @PostMapping("/add")
     void add(@RequestBody OfferDto offer) {
         offerService.addOffer(offer);
     }

@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.controllers;
+package com.example.springdatabasicdemo.web;
 
 import com.example.springdatabasicdemo.services.dtos.BrandDto;
 import com.example.springdatabasicdemo.exeptions.BrandNotFoundExeption;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-//@RequestMapping("/brands")
+@RequestMapping("/brands")
 public class BrandController {
 
 //    @Autowired
@@ -18,27 +18,27 @@ public class BrandController {
 
     public BrandController() {}
 
-    @GetMapping("/brands")
+    @GetMapping("/all")
     Iterable<BrandDto> all() {
         return brandService.getAll();
     }
 
-    @GetMapping("/brands/{id}")
+    @GetMapping("/{id}")
     Optional<BrandDto> get(@PathVariable UUID id) {
         return Optional.ofNullable(brandService.find((id)).orElseThrow(() -> new BrandNotFoundExeption(id)));
     }
 
-    @DeleteMapping("/brands/{id}")
+    @DeleteMapping("/{id}")
     void delete(@PathVariable UUID id) {
         brandService.destroyById(id);
     }
 
-    @PutMapping("/brands")
+    @PutMapping("/update")
     BrandDto update(@RequestBody BrandDto brand) {
         return brandService.create(brand);
     }
 
-    @PostMapping("/brands")
+    @PostMapping("/add")
     void add(@RequestBody BrandDto brand) {
         brandService.addBrand(brand);
     }

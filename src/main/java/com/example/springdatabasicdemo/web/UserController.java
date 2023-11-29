@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.controllers;
+package com.example.springdatabasicdemo.web;
 
 import com.example.springdatabasicdemo.services.dtos.UserDto;
 import com.example.springdatabasicdemo.exeptions.UserNotFoundExeption;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class UserController {
 
 //    @Autowired
@@ -18,27 +18,27 @@ public class UserController {
 
     public UserController() {}
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     Iterable<UserDto> all() {
         return userService.getAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     Optional<UserDto> get(@PathVariable UUID id) {
         return Optional.ofNullable(userService.find((id)).orElseThrow(() -> new UserNotFoundExeption(id)));
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     void delete(@PathVariable UUID id) {
         userService.destroyById(id);
     }
 
-    @PutMapping("/users")
+    @PutMapping("/update")
     UserDto update(@RequestBody UserDto user) {
         return userService.create(user);
     }
 
-    @PostMapping("/users")
+    @PostMapping("/add")
     void add(@RequestBody UserDto user) {
         userService.addUser(user);
     }

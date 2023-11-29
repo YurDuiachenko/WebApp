@@ -1,16 +1,19 @@
-package com.example.springdatabasicdemo.controllers;
+package com.example.springdatabasicdemo.web;
 
 import com.example.springdatabasicdemo.services.dtos.ModelDto;
 import com.example.springdatabasicdemo.exeptions.ModelNotFoundExeption;
 import com.example.springdatabasicdemo.services.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 import java.util.Optional;
 import java.util.UUID;
 
-@RestController
-//@RequestMapping("/models")
+//@RestController
+@Controller
+@RequestMapping("/models")
 public class ModelController {
 
 //    @Autowired
@@ -18,28 +21,30 @@ public class ModelController {
 
     public ModelController() {}
 
-    @GetMapping("/models")
-    Iterable<ModelDto> all() {
-        return modelService.getAll();
+    @GetMapping("/all")
+    public String all(Model model) {
+        model.addAttribute("modelInfos", modelService.getAll());
+
+        return "models-all";
     }
 
-    @GetMapping("/models/{id}")
-    Optional<ModelDto> get(@PathVariable UUID id) {
+    @GetMapping("/{id}")
+    public Optional<ModelDto> get(@PathVariable UUID id) {
         return Optional.ofNullable(modelService.find((id)).orElseThrow(() -> new ModelNotFoundExeption(id)));
     }
 
-    @DeleteMapping("/models/{id}")
-    void delete(@PathVariable UUID id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id) {
         modelService.destroyById(id);
     }
 
-    @PutMapping("/models")
-    ModelDto update(@RequestBody ModelDto model) {
+    @PutMapping("/update")
+    public ModelDto update(@RequestBody ModelDto model) {
         return modelService.create(model);
     }
 
-    @PostMapping("/models")
-    void add(@RequestBody ModelDto model) {
+    @PostMapping("/add")
+    public void add(@RequestBody ModelDto model) {
         modelService.addModel(model);
     }
 

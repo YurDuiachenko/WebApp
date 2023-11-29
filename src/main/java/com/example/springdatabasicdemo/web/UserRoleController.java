@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.controllers;
+package com.example.springdatabasicdemo.web;
 
 import com.example.springdatabasicdemo.services.dtos.UserRoleDto;
 import com.example.springdatabasicdemo.exeptions.UserRoleNotFoundExeption;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-//@RequestMapping("/roles")
+@RequestMapping("/roles")
 public class UserRoleController {
 
 //    @Autowired
@@ -18,27 +18,27 @@ public class UserRoleController {
 
     public UserRoleController() {}
 
-    @GetMapping("/roles")
+    @GetMapping("/all")
     Iterable<UserRoleDto> all() {
         return userRoleService.getAll();
     }
 
-    @GetMapping("/roles/{id}")
+    @GetMapping("/{id}")
     Optional<UserRoleDto> get(@PathVariable UUID id) {
         return Optional.ofNullable(userRoleService.find((id)).orElseThrow(() -> new UserRoleNotFoundExeption(id)));
     }
 
-    @DeleteMapping("/roles/{id}")
+    @DeleteMapping("/{id}")
     void delete(@PathVariable UUID id) {
         userRoleService.destroyById(id);
     }
 
-    @PutMapping("/roles")
+    @PutMapping("/update")
     UserRoleDto update(@RequestBody UserRoleDto role) {
         return userRoleService.create(role);
     }
 
-    @PostMapping("/roles")
+    @PostMapping("/add")
     void add(@RequestBody UserRoleDto userRole) {
         userRoleService.addUserRole(userRole);
     }

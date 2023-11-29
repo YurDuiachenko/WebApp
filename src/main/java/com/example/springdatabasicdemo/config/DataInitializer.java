@@ -4,7 +4,6 @@ import com.example.springdatabasicdemo.constants.Category;
 import com.example.springdatabasicdemo.constants.Engine;
 import com.example.springdatabasicdemo.constants.Role;
 import com.example.springdatabasicdemo.constants.Transmission;
-import com.example.springdatabasicdemo.dtos.*;
 import com.example.springdatabasicdemo.services.*;
 import com.example.springdatabasicdemo.services.dtos.*;
 import org.springframework.boot.CommandLineRunner;
