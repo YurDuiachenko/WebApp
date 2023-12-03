@@ -1,6 +1,7 @@
-package com.example.springdatabasicdemo.services.dtos;
+package com.example.springdatabasicdemo.dtos.car;
 
 import com.example.springdatabasicdemo.constants.Category;
+import com.example.springdatabasicdemo.dtos.brand.BrandDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -18,7 +19,7 @@ public  class ModelDto {
     private  int endYear;
     private  Date created;
     private  Date modified;
-    private  BrandDto brand;
+    private BrandDto brand;
 
     public ModelDto(
             UUID id,

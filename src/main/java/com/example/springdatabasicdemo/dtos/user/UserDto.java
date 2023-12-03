@@ -1,5 +1,6 @@
-package com.example.springdatabasicdemo.services.dtos;
+package com.example.springdatabasicdemo.dtos.user;
 
+import com.example.springdatabasicdemo.dtos.role.UserRoleDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -18,7 +19,7 @@ public  class UserDto {
     private  String imageUrl;
     private  Date created;
     private  Date modified;
-    private  UserRoleDto role;
+    private UserRoleDto role;
 
     public UserDto(
             UUID id,

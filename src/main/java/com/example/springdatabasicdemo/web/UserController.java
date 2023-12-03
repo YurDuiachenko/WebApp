@@ -1,6 +1,6 @@
 package com.example.springdatabasicdemo.web;
 
-import com.example.springdatabasicdemo.services.dtos.UserDto;
+import com.example.springdatabasicdemo.dtos.user.UserDto;
 import com.example.springdatabasicdemo.exeptions.UserNotFoundExeption;
 import com.example.springdatabasicdemo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

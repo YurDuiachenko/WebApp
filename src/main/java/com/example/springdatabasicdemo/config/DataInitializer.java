@@ -4,8 +4,12 @@ import com.example.springdatabasicdemo.constants.Category;
 import com.example.springdatabasicdemo.constants.Engine;
 import com.example.springdatabasicdemo.constants.Role;
 import com.example.springdatabasicdemo.constants.Transmission;
+import com.example.springdatabasicdemo.dtos.brand.BrandDto;
+import com.example.springdatabasicdemo.dtos.car.ModelDto;
+import com.example.springdatabasicdemo.dtos.offer.OfferDto;
+import com.example.springdatabasicdemo.dtos.role.UserRoleDto;
+import com.example.springdatabasicdemo.dtos.user.UserDto;
 import com.example.springdatabasicdemo.services.*;
-import com.example.springdatabasicdemo.services.dtos.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +18,10 @@ import java.util.Date;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
-
-    
     private final UserRoleService userRoleService;
-    
     private final ModelService modelService;
-    
     private final UserService userService;
-    
     private final BrandService brandService;
-    
     private final OfferService offerService;
 
     public DataInitializer(
@@ -46,12 +44,9 @@ public class DataInitializer implements CommandLineRunner {
         seedData();
     }
 
-
     private void seedData() throws IOException {
 
-        UserRoleDto role = new UserRoleDto(
-                Role.ADMIN
-        );
+        UserRoleDto role = new UserRoleDto(Role.ADMIN);
         role = userRoleService.create(role);
 
         UserDto user = new UserDto(
@@ -89,7 +84,7 @@ public class DataInitializer implements CommandLineRunner {
 
         ModelDto model = new ModelDto(
                 "Orlando",
-                Category.MOTORCYCLE,
+                Category.CAR,
                 "https://source.unsplash.com/random/200x200?sig=1",
                 2010,
                 2011,
@@ -98,6 +93,73 @@ public class DataInitializer implements CommandLineRunner {
                 brand
         );
         model = modelService.create(model);
+
+        BrandDto brand1 = new BrandDto(
+            "Honda",
+            new Date(),
+            new Date()
+        );
+        brand1 = brandService.create(brand1);
+
+        ModelDto model1 = new ModelDto(
+            "Civic",
+            Category.CAR,
+            "https://source.unsplash.com/random/200x200?sig=2",
+            2010,
+            2011,
+            new Date(),
+            new Date(),
+            brand1
+        );
+
+        ModelDto model2 = new ModelDto(
+            "Impala",
+            Category.CAR,
+            "https://source.unsplash.com/random/200x200?sig=3",
+            2010,
+            2011,
+            new Date(),
+            new Date(),
+            brand
+        );
+
+        ModelDto model3 = new ModelDto(
+            "Integra",
+            Category.CAR,
+            "https://source.unsplash.com/random/200x200?sig=4",
+            2010,
+            2011,
+            new Date(),
+            new Date(),
+            brand1
+        );
+
+        ModelDto model4 = new ModelDto(
+            "Accord",
+            Category.CAR,
+            "https://source.unsplash.com/random/200x200?sig=5",
+            2010,
+            2011,
+            new Date(),
+            new Date(),
+            brand1
+        );
+
+        ModelDto model5 = new ModelDto(
+            "Camaro",
+            Category.CAR,
+            "https://source.unsplash.com/random/200x200?sig=6",
+            2010,
+            2011,
+            new Date(),
+            new Date(),
+            brand
+        );
+        modelService.create(model1);
+        modelService.create(model2);
+        modelService.create(model3);
+        modelService.create(model4);
+        modelService.create(model5);
 
         OfferDto offer = new OfferDto(
                 "fast",

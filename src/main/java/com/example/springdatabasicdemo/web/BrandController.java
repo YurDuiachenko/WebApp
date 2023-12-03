@@ -1,15 +1,17 @@
 package com.example.springdatabasicdemo.web;
 
-import com.example.springdatabasicdemo.services.dtos.BrandDto;
+import com.example.springdatabasicdemo.dtos.brand.BrandDto;
 import com.example.springdatabasicdemo.exeptions.BrandNotFoundExeption;
 import com.example.springdatabasicdemo.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("/brands")
 public class BrandController {
 
@@ -19,8 +21,10 @@ public class BrandController {
     public BrandController() {}
 
     @GetMapping("/all")
-    Iterable<BrandDto> all() {
-        return brandService.getAll();
+    public String all(Model model) {
+        model.addAttribute("allBrand", brandService.getAll());
+
+        return "pages-brand/brand-all";
     }
 
     @GetMapping("/{id}")

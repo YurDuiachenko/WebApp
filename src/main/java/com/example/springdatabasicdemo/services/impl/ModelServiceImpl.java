@@ -1,11 +1,13 @@
 package com.example.springdatabasicdemo.services.impl;
 
-import com.example.springdatabasicdemo.services.dtos.ModelDto;
+import com.example.springdatabasicdemo.dtos.car.CarDetailsDto;
+import com.example.springdatabasicdemo.dtos.car.ModelDto;
 import com.example.springdatabasicdemo.models.Brand;
 import com.example.springdatabasicdemo.models.Model;
 import com.example.springdatabasicdemo.repositories.ModelRepository;
 import com.example.springdatabasicdemo.services.BrandService;
 import com.example.springdatabasicdemo.services.ModelService;
+import com.example.springdatabasicdemo.dtos.car.ShowAllCarsDto;
 import com.example.springdatabasicdemo.util.ValidationUtil;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
@@ -71,8 +73,18 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<ModelDto> getAll() {
-        return modelRepository.findAll().stream().map((s) -> modelMapper.map(s, ModelDto.class)).collect(Collectors.toList());
+    public List<ShowAllCarsDto> getAll() {
+        return modelRepository.findAll()
+            .stream()
+            .map(
+                (s) -> modelMapper
+                    .map(s, ShowAllCarsDto.class))
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public CarDetailsDto modelDetails(String name) {
+        return modelMapper.map(modelRepository.findAllByName(name).orElse(null), CarDetailsDto.class);
     }
 
     @Autowired

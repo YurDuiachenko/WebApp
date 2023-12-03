@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1 th:text="${carDetails.brandName} + ' ' + ${carDetails.name}">Car Details</h1>
+                </div>
+                <div class="row bg-light rounded">
+                    <div class="col-md-6"><img th:src="${carDetails.imageURL}" height="350px"></div>
+                    <div>
+                        <h3 th:text="Details"></h3>
+                        <h4 th:text="${carDetails.brandName} + ' :Brand'"></h4>
+                        <h4 th:text="${carDetails.name} + ' :Model'"></h4>
+                        <h4 th:text="${carDetails.startYear} + ' - ' + ${carDetails.endYear} + ' :Years'"></h4>
+                        <h4 th:text="${carDetails.category} + ' :Types'"></h4>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

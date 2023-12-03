@@ -2,7 +2,7 @@
 //
 //import com.example.springdatabasicdemo.exeptions.ModelNotFoundExeption;
 //import com.example.springdatabasicdemo.services.ModelService;
-//import com.example.springdatabasicdemo.services.dtos.ModelDto;
+//import com.example.springdatabasicdemo.services.dtos.car.ModelDto;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.ui.Model;

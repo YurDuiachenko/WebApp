@@ -1,6 +1,6 @@
 package com.example.springdatabasicdemo.services.impl;
 
-import com.example.springdatabasicdemo.services.dtos.OfferDto;
+import com.example.springdatabasicdemo.dtos.offer.OfferDto;
 import com.example.springdatabasicdemo.models.Model;
 import com.example.springdatabasicdemo.models.Offer;
 import com.example.springdatabasicdemo.models.User;

@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.services.dtos;
+package com.example.springdatabasicdemo.dtos.brand;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

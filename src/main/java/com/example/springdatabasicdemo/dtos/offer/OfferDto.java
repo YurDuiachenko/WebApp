@@ -1,7 +1,9 @@
-package com.example.springdatabasicdemo.services.dtos;
+package com.example.springdatabasicdemo.dtos.offer;
 
 import com.example.springdatabasicdemo.constants.Engine;
 import com.example.springdatabasicdemo.constants.Transmission;
+import com.example.springdatabasicdemo.dtos.user.UserDto;
+import com.example.springdatabasicdemo.dtos.car.ModelDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -21,8 +23,8 @@ public  class OfferDto {
     private  int year;
     private  Date created;
     private  Date modified;
-    private  ModelDto model;
-    private  UserDto seller;
+    private ModelDto model;
+    private UserDto seller;
 
     public OfferDto(
             UUID id,

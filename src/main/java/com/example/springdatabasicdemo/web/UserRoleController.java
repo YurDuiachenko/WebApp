@@ -1,6 +1,6 @@
 package com.example.springdatabasicdemo.web;
 
-import com.example.springdatabasicdemo.services.dtos.UserRoleDto;
+import com.example.springdatabasicdemo.dtos.role.UserRoleDto;
 import com.example.springdatabasicdemo.exeptions.UserRoleNotFoundExeption;
 import com.example.springdatabasicdemo.services.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

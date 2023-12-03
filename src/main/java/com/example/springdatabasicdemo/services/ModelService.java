@@ -1,7 +1,9 @@
 package com.example.springdatabasicdemo.services;
 
 
-import com.example.springdatabasicdemo.services.dtos.ModelDto;
+import com.example.springdatabasicdemo.dtos.car.CarDetailsDto;
+import com.example.springdatabasicdemo.dtos.car.ModelDto;
+import com.example.springdatabasicdemo.dtos.car.ShowAllCarsDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,5 +21,7 @@ public interface ModelService {
 
     Optional<ModelDto> find(UUID id);
 
-    List<ModelDto> getAll();
+    List<ShowAllCarsDto> getAll();
+
+    CarDetailsDto modelDetails(String name);
 }

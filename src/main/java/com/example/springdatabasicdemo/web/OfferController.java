@@ -1,6 +1,6 @@
 package com.example.springdatabasicdemo.web;
 
-import com.example.springdatabasicdemo.services.dtos.OfferDto;
+import com.example.springdatabasicdemo.dtos.offer.OfferDto;
 import com.example.springdatabasicdemo.exeptions.OfferNotFoundExeption;
 import com.example.springdatabasicdemo.services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;

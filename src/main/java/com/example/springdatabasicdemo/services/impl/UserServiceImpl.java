@@ -1,6 +1,6 @@
 package com.example.springdatabasicdemo.services.impl;
 
-import com.example.springdatabasicdemo.services.dtos.UserDto;
+import com.example.springdatabasicdemo.dtos.user.UserDto;
 import com.example.springdatabasicdemo.models.User;
 import com.example.springdatabasicdemo.models.UserRole;
 import com.example.springdatabasicdemo.repositories.UserRepository;

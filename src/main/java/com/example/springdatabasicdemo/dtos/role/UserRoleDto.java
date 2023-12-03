@@ -1,4 +1,4 @@
-package com.example.springdatabasicdemo.services.dtos;
+package com.example.springdatabasicdemo.dtos.role;
 
 import com.example.springdatabasicdemo.constants.Role;
 import jakarta.validation.constraints.NotEmpty;
