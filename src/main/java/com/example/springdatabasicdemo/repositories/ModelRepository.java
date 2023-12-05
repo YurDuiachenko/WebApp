@@ -9,6 +9,6 @@ import java.util.UUID;
 @Repository
 public interface ModelRepository extends JpaRepository <Model, UUID> {
 
-    Optional<Model> findAllByName(String name);
+    Optional<Model> findByName(String name);
 
 }

@@ -1,5 +1,7 @@
 package com.example.springdatabasicdemo.services.impl;
 
+import com.example.springdatabasicdemo.dtos.brand.BrandDto;
+import com.example.springdatabasicdemo.dtos.car.AddCarDto;
 import com.example.springdatabasicdemo.dtos.car.CarDetailsDto;
 import com.example.springdatabasicdemo.dtos.car.ModelDto;
 import com.example.springdatabasicdemo.models.Brand;
@@ -38,11 +40,11 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public void addModel(ModelDto modelDto) {
-        if (!this.validationUtil.isValid(modelDto)) {
+    public void addModel(AddCarDto addCarDto) {
+        if (!this.validationUtil.isValid(addCarDto)) {
 
             this.validationUtil
-                .violations(modelDto)
+                .violations(addCarDto)
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .forEach(System.out::println);
@@ -50,8 +52,8 @@ public class ModelServiceImpl implements ModelService {
             throw new IllegalArgumentException("Illegal arguments!");
         }
 
-        Model model = this.modelMapper.map(modelDto, Model.class);
-        model.setBrand(modelMapper.map(brandService.create(modelDto.getBrand()), Brand.class));
+        Model model = this.modelMapper.map(addCarDto, Model.class);
+        model.setBrand(modelMapper.map(brandService.create(new BrandDto(addCarDto.getBrandName())), Brand.class));
 
         this.modelRepository.saveAndFlush(model);
 
@@ -84,7 +86,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public CarDetailsDto modelDetails(String name) {
-        return modelMapper.map(modelRepository.findAllByName(name).orElse(null), CarDetailsDto.class);
+        return modelMapper.map(modelRepository.findByName(name).orElse(null), CarDetailsDto.class);
     }
 
     @Autowired

@@ -101,6 +101,27 @@ public class DataInitializer implements CommandLineRunner {
         );
         brand1 = brandService.create(brand1);
 
+        BrandDto brand2 = new BrandDto(
+            "Ford",
+            new Date(),
+            new Date()
+        );
+        brand2 = brandService.create(brand2);
+
+        BrandDto brand3 = new BrandDto(
+            "Toyota",
+            new Date(),
+            new Date()
+        );
+        brand3 = brandService.create(brand3);
+
+        BrandDto brand4 = new BrandDto(
+            "Mercedes",
+            new Date(),
+            new Date()
+        );
+        brand4 = brandService.create(brand4);
+
         ModelDto model1 = new ModelDto(
             "Civic",
             Category.CAR,
@@ -109,7 +130,7 @@ public class DataInitializer implements CommandLineRunner {
             2011,
             new Date(),
             new Date(),
-            brand1
+            brand3
         );
 
         ModelDto model2 = new ModelDto(
@@ -131,7 +152,7 @@ public class DataInitializer implements CommandLineRunner {
             2011,
             new Date(),
             new Date(),
-            brand1
+            brand3
         );
 
         ModelDto model4 = new ModelDto(
@@ -142,7 +163,7 @@ public class DataInitializer implements CommandLineRunner {
             2011,
             new Date(),
             new Date(),
-            brand1
+            brand3
         );
 
         ModelDto model5 = new ModelDto(

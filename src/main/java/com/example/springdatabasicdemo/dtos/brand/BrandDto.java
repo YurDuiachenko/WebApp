@@ -35,6 +35,10 @@ public class BrandDto {
     public BrandDto() {
     }
 
+    public BrandDto(String brandName) {
+        this.name = brandName;
+    }
+
     public UUID getId() {
         return id;
     }

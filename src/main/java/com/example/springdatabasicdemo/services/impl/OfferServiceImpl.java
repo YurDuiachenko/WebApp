@@ -1,6 +1,9 @@
 package com.example.springdatabasicdemo.services.impl;
 
+import com.example.springdatabasicdemo.dtos.car.CarDetailsDto;
+import com.example.springdatabasicdemo.dtos.offer.OfferDetailsDto;
 import com.example.springdatabasicdemo.dtos.offer.OfferDto;
+import com.example.springdatabasicdemo.dtos.offer.ShowAllOffersDto;
 import com.example.springdatabasicdemo.models.Model;
 import com.example.springdatabasicdemo.models.Offer;
 import com.example.springdatabasicdemo.models.User;
@@ -74,9 +77,15 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<OfferDto> getAll() {
-        return offerRepository.findAll().stream().map((s) -> modelMapper.map(s, OfferDto.class)).collect(Collectors.toList());
+    public List<ShowAllOffersDto> getAll() {
+        return offerRepository.findAll().stream().map((s) -> modelMapper.map(s, ShowAllOffersDto.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public OfferDetailsDto offerDetails(UUID id) {
+        return modelMapper.map(offerRepository.findById(id).orElse(null), OfferDetailsDto.class);
+    }
+
 
     @Autowired
     public void setOfferRepository(OfferRepository offerRepository) {

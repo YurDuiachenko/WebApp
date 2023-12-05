@@ -1,8 +1,10 @@
 package com.example.springdatabasicdemo.web;
 
+import com.example.springdatabasicdemo.dtos.car.AddCarDto;
 import com.example.springdatabasicdemo.dtos.car.ModelDto;
 import com.example.springdatabasicdemo.exeptions.ModelNotFoundExeption;
 import com.example.springdatabasicdemo.services.ModelService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,18 +18,18 @@ import java.util.UUID;
 //@RestController
 @Controller
 @RequestMapping("/models")
-public class CarController {
+public class ModelController {
 
 //    @Autowired
     private ModelService modelService;
 
-    public CarController() {}
+    public ModelController() {}
 
     @GetMapping("/all")
     public String all(Model model) {
         model.addAttribute("models", modelService.getAll());
 
-        return "car-all";
+        return "models-all";
     }
 
     @GetMapping("/{id}")
@@ -39,7 +41,7 @@ public class CarController {
     public String carDetails(@PathVariable("model-name") String modelName, Model model) {
         model.addAttribute("carDetails", modelService.modelDetails(modelName));
 
-        return "car-details";
+        return "models-details";
     }
 
     @DeleteMapping("/{id}")
@@ -52,20 +54,28 @@ public class CarController {
         return modelService.create(model);
     }
 
-//    @PostMapping("/add")
-//    public void add(@RequestBody ModelDto model) {
-//        modelService.addModel(model);
-//    }
+    @GetMapping("/add")
+    public String addCar() {
+        return "models-add";
+    }
+    @ModelAttribute("carModel")
+    public ModelDto init(){
+        return new ModelDto();
+    }
+
     @PostMapping("/add")
-    public String addCompany(ModelDto modelDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addCar(@Valid AddCarDto carModel,
+        BindingResult bindingResult,
+        RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("modelDto", modelDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.companyModel",
+            redirectAttributes.addFlashAttribute("carModel", carModel);
+            redirectAttributes
+                .addFlashAttribute("org.springframework.validation.BindingResult.carModel",
                 bindingResult);
             return "redirect:/models/add";
         }
-        modelService.addModel(modelDto);
+        modelService.addModel(carModel);
 
         return "redirect:/";
     }

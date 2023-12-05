@@ -13,12 +13,12 @@
                 </div>
                 <div class="row bg-light rounded">
                     <div class="col-md-6"><img th:src="${carDetails.imageURL}" height="350px"></div>
-                    <div>
+                    <div class="col-md-6 pt-3">
                         <h3 th:text="Details"></h3>
                         <h4 th:text="${carDetails.brandName} + ' :Brand'"></h4>
                         <h4 th:text="${carDetails.name} + ' :Model'"></h4>
                         <h4 th:text="${carDetails.startYear} + ' - ' + ${carDetails.endYear} + ' :Years'"></h4>
-                        <h4 th:text="${carDetails.category} + ' :Types'"></h4>
+                        <h4 th:text="${carDetails.category} + ' :Types:'"></h4>
                     </div>
                 </div>
             </main>
