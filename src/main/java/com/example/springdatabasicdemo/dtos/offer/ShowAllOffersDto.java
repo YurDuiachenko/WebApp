@@ -2,14 +2,7 @@ package com.example.springdatabasicdemo.dtos.offer;
 
 import com.example.springdatabasicdemo.constants.Engine;
 import com.example.springdatabasicdemo.constants.Transmission;
-import com.example.springdatabasicdemo.dtos.user.UserDto;
-import com.example.springdatabasicdemo.dtos.car.ModelDto;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
 public  class ShowAllOffersDto {

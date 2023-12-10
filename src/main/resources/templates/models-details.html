@@ -1,30 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html class="h-100" lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head"/>
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
 <main class="flex-shrink-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
-                <div class="justify-content-center">
-                    <h1 th:text="${carDetails.brandName} + ' ' + ${carDetails.name}">Car Details</h1>
-                </div>
-                <div class="row bg-light rounded">
-                    <div class="col-md-6"><img th:src="${carDetails.imageURL}" height="350px"></div>
-                    <div class="col-md-6 pt-3">
-                        <h3 th:text="Details"></h3>
-                        <h4 th:text="${carDetails.brandName} + ' :Brand'"></h4>
-                        <h4 th:text="${carDetails.name} + ' :Model'"></h4>
-                        <h4 th:text="${carDetails.startYear} + ' - ' + ${carDetails.endYear} + ' :Years'"></h4>
-                        <h4 th:text="${carDetails.category} + ' :Types:'"></h4>
+    <div class="bg-image"
+         style="
+         background-image:
+         url('https://images.unsplash.com/photo-1487424439918-bc6b5bef0380?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          height: 100%;
+          min-height: 600px;
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;">
+        <div class="container" style="height: max-content; width: fit-content;">
+            <div class="row">
+                <main class="jumbotron rounded col-md-12 align-self-center pt-5">
+                    <div class="justify-content-center text-center">
+                        <h1 th:text="${carDetails.brandName} + ' ' + ${carDetails.name}">Car Details</h1>
                     </div>
-                </div>
-            </main>
+                    <div class="row bg-light rounded" style="width: min-content; margin-bottom: 20px">
+                        <div class="col-md-6" style=" margin-top: 10px">
+                            <img height="350px" th:src="${carDetails.imageURL}"></div>
+                        <div class="col-md-6 pt-3" style="margin: 10px;">
+                            <h3 th:text="Details"></h3>
+                            <h5 th:text="'Brand: ' + ${carDetails.brandName}"></h5>
+                            <h5 th:text="'Model: ' + ${carDetails.name}"></h5>
+                            <h5 th:text="'Years: ' + ${carDetails.startYear} + ' - ' + ${carDetails.endYear}"></h5>
+                            <h5 th:text="'Types: ' + ${carDetails.category}"></h5>
+                            <div class="align-bottom"><a class="btn btn-danger align-bottom"
+                                                         style="background-color: #5a624f"
+                                                         th:href="@{/models/model-delete/{model-name}(model-name=${carDetails.name})}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </div>
     </div>
 </main>
+</div>
 <footer th:replace="fragments/footer"></footer>
 </body>
 </html>

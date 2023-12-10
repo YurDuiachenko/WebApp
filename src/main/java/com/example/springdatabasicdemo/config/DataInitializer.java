@@ -85,7 +85,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelDto model = new ModelDto(
                 "Orlando",
                 Category.CAR,
-                "https://source.unsplash.com/random/200x200?sig=1",
+                "https://avatars.mds.yandex.net/get-autoru-vos/6932162/aedd6ddc08ca6345468b8ead55625e5f/1200x900n",
+            16_699.99,
                 2010,
                 2011,
                 new Date(),
@@ -125,7 +126,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelDto model1 = new ModelDto(
             "Civic",
             Category.CAR,
-            "https://source.unsplash.com/random/200x200?sig=2",
+            "https://images.caricos.com/h/honda/2016_honda_civic/images/2560x1440/2016_honda_civic_28_2560x1440.jpg",
+            20_199.99,
             2010,
             2011,
             new Date(),
@@ -136,7 +138,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelDto model2 = new ModelDto(
             "Impala",
             Category.CAR,
-            "https://source.unsplash.com/random/200x200?sig=3",
+            "https://kuznitsaspb.ru/wp-content/uploads/a/1/4/a14e97cc0b19372e8e0fab4d6a7ee3b6.jpeg",
+            4_999.99,
             2010,
             2011,
             new Date(),
@@ -147,7 +150,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelDto model3 = new ModelDto(
             "Integra",
             Category.CAR,
-            "https://source.unsplash.com/random/200x200?sig=4",
+            "https://w-dog.ru/wallpapers/1/8/534995026683408/avtomobil-oboi-honda-integra-type-r-tyuning-belyj-poziciya-yaponiya-avtomobilnye-oboya-xonda-integra-belaya-peredok-krasivaya-mashina.jpg",
+            13_999.99,
             2010,
             2011,
             new Date(),
@@ -158,7 +162,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelDto model4 = new ModelDto(
             "Accord",
             Category.CAR,
-            "https://source.unsplash.com/random/200x200?sig=5",
+            "https://kuznitsaspb.ru/wp-content/uploads/1/4/1/14120c2cc3e82d8cbcad17bc58c0d9e0.jpeg",
+            7_299.99,
             2010,
             2011,
             new Date(),
@@ -169,7 +174,8 @@ public class DataInitializer implements CommandLineRunner {
         ModelDto model5 = new ModelDto(
             "Camaro",
             Category.CAR,
-            "https://source.unsplash.com/random/200x200?sig=6",
+            "http://cdni.autocarindia.com/Galleries/20131210075934_JL_ChevCamaro-01.jpg",
+            36_799.99,
             2010,
             2011,
             new Date(),
@@ -210,9 +216,8 @@ public class DataInitializer implements CommandLineRunner {
                 user1
         );
 
-        System.out.println(offer);
-        System.out.println(offerService.create(offer));
-        System.out.println(offerService.create(offer1));
+        offerService.create(offer);
+        offerService.create(offer1);
 //
 //        userService.destroy(user);
 

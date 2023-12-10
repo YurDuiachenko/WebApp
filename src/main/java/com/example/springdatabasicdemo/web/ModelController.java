@@ -3,6 +3,8 @@ package com.example.springdatabasicdemo.web;
 import com.example.springdatabasicdemo.dtos.car.AddCarDto;
 import com.example.springdatabasicdemo.dtos.car.ModelDto;
 import com.example.springdatabasicdemo.exeptions.ModelNotFoundExeption;
+import com.example.springdatabasicdemo.repositories.ModelRepository;
+import com.example.springdatabasicdemo.services.BrandService;
 import com.example.springdatabasicdemo.services.ModelService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,8 @@ public class ModelController {
 
 //    @Autowired
     private ModelService modelService;
-
-    public ModelController() {}
+    private ModelRepository modelRepository;
+    private BrandService brandService;
 
     @GetMapping("/all")
     public String all(Model model) {
@@ -55,9 +57,18 @@ public class ModelController {
     }
 
     @GetMapping("/add")
-    public String addCar() {
+    public String addCar(Model model) {
+        model.addAttribute("brands", brandService.getAll());
         return "models-add";
     }
+
+    @GetMapping("/model-delete/{model-name}")
+    public String deleteCar(@PathVariable("model-name") String modelName) {
+        modelService.destroyById(modelRepository.findByName(modelName).get().id);
+
+        return "redirect:/models/all";
+    }
+
     @ModelAttribute("carModel")
     public ModelDto init(){
         return new ModelDto();
@@ -68,20 +79,31 @@ public class ModelController {
         BindingResult bindingResult,
         RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("carModel", carModel);
-            redirectAttributes
-                .addFlashAttribute("org.springframework.validation.BindingResult.carModel",
-                bindingResult);
-            return "redirect:/models/add";
-        }
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("carModel", carModel);
+//            redirectAttributes
+//                .addFlashAttribute("org.springframework.validation.BindingResult.carModel",
+//                bindingResult);
+//            return "redirect:/models/add";
+//        }
         modelService.addModel(carModel);
 
-        return "redirect:/";
+        return "redirect:/models/all";
     }
 
     @Autowired
     public void setModelService(ModelService modelService) {
         this.modelService = modelService;
     }
+
+    @Autowired
+    public void setBrandService(BrandService brandService) {
+        this.brandService = brandService;
+    }
+
+    @Autowired
+    public void setModelRepository(ModelRepository modelRepository) {
+        this.modelRepository = modelRepository;
+    }
+
 }

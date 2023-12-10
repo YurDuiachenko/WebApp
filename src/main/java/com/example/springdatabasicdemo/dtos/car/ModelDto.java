@@ -2,9 +2,6 @@ package com.example.springdatabasicdemo.dtos.car;
 
 import com.example.springdatabasicdemo.constants.Category;
 import com.example.springdatabasicdemo.dtos.brand.BrandDto;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 import java.util.Objects;
@@ -15,6 +12,7 @@ public  class ModelDto {
     private  String name;
     private  Category category;
     private  String imageURL;
+    private double price;
     private  int startYear;
     private  int endYear;
     private  Date created;
@@ -22,15 +20,15 @@ public  class ModelDto {
     private BrandDto brand;
 
     public ModelDto(
-            UUID id,
-            String name,
-            Category category,
-            String imageURL,
-            int startYear,
-            int endYear,
-            Date created,
-            Date modified,
-            BrandDto brand
+        UUID id,
+        String name,
+        Category category,
+        String imageURL,
+        int startYear,
+        int endYear,
+        Date created,
+        Date modified,
+        BrandDto brand
     ) {
         this.id = id;
         this.name = name;
@@ -54,6 +52,38 @@ public  class ModelDto {
         this.brand = brand;
     }
 
+    public ModelDto(String name, Category category, String imageURL, double price, int startYear, int endYear, Date created, Date modified) {
+        this.name = name;
+        this.category = category;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.created = created;
+        this.modified = modified;
+    }
+
+    public ModelDto(String name, Category category, String imageURL, double price, int startYear, int endYear) {
+        this.name = name;
+        this.category = category;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.startYear = startYear;
+        this.endYear = endYear;
+    }
+
+    public ModelDto(String name, Category category, String imageURL, double price, int startYear, int endYear, Date created, Date modified, BrandDto brand) {
+        this.name = name;
+        this.category = category;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.created = created;
+        this.modified = modified;
+        this.brand = brand;
+    }
+
     public ModelDto() {
     }
 
@@ -65,9 +95,6 @@ public  class ModelDto {
         this.id = id;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 2, message = "Name must be minimum two characters!")
     public String getName() {
         return name;
     }
@@ -76,8 +103,6 @@ public  class ModelDto {
         this.name = name;
     }
 
-    @NotNull
-    @NotEmpty
     public Category getCategory() {
         return category;
     }
@@ -92,6 +117,14 @@ public  class ModelDto {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getStartYear() {
@@ -176,14 +209,14 @@ public  class ModelDto {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (ModelDto) obj;
         return Objects.equals(this.id, that.id) &&
-                Objects.equals(this.name, that.name) &&
-                Objects.equals(this.category, that.category) &&
-                Objects.equals(this.imageURL, that.imageURL) &&
-                this.startYear == that.startYear &&
-                this.endYear == that.endYear &&
-                Objects.equals(this.created, that.created) &&
-                Objects.equals(this.modified, that.modified) &&
-                Objects.equals(this.brand, that.brand);
+            Objects.equals(this.name, that.name) &&
+            Objects.equals(this.category, that.category) &&
+            Objects.equals(this.imageURL, that.imageURL) &&
+            this.startYear == that.startYear &&
+            this.endYear == that.endYear &&
+            Objects.equals(this.created, that.created) &&
+            Objects.equals(this.modified, that.modified) &&
+            Objects.equals(this.brand, that.brand);
     }
 
     @Override
@@ -194,15 +227,15 @@ public  class ModelDto {
     @Override
     public String toString() {
         return "ModelDto[" +
-                "id=" + id + ", " +
-                "name=" + name + ", " +
-                "category=" + category + ", " +
-                "imageURL=" + imageURL + ", " +
-                "startYear=" + startYear + ", " +
-                "endYear=" + endYear + ", " +
-                "created=" + created + ", " +
-                "modified=" + modified + ", " +
-                "brand=" + brand + ']';
+            "id=" + id + ", " +
+            "name=" + name + ", " +
+            "category=" + category + ", " +
+            "imageURL=" + imageURL + ", " +
+            "startYear=" + startYear + ", " +
+            "endYear=" + endYear + ", " +
+            "created=" + created + ", " +
+            "modified=" + modified + ", " +
+            "brand=" + brand + ']';
     }
 
 }

@@ -9,15 +9,15 @@ import jakarta.validation.constraints.Size;
 
 public class AddCarDto {
     private String brandName;
-    @UniqueModelName
+//    @UniqueModelName
     private  String name;
     private Category category;
     private  String imageURL;
     private  int startYear;
     private  int endYear;
 
-    @NotEmpty(message = "Brand name must not be null or empty!")
-    @Size(min = 2, max = 10, message = "Brand name must be between 2 and 10 characters!")
+//    @NotEmpty(message = "Brand name must not be null or empty!")
+//    @Size(min = 2, max = 10, message = "Brand name must be between 2 and 10 characters!")
     public String getBrandName() {
         return brandName;
     }
@@ -27,8 +27,8 @@ public class AddCarDto {
     }
 
 
-    @NotEmpty(message = "Model name must not be null or empty!")
-    @Size(min = 2, max = 10, message = "Model name must be between 2 and 10 characters!")
+//    @NotEmpty(message = "Model name must not be null or empty!")
+//    @Size(min = 2, max = 10, message = "Model name must be between 2 and 10 characters!")
     public String getName() {
         return name;
     }

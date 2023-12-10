@@ -1,17 +1,12 @@
 package com.example.springdatabasicdemo.services.impl;
 
-import com.example.springdatabasicdemo.dtos.brand.BrandDto;
-import com.example.springdatabasicdemo.dtos.car.AddCarDto;
-import com.example.springdatabasicdemo.dtos.car.CarDetailsDto;
-import com.example.springdatabasicdemo.dtos.car.ModelDto;
-import com.example.springdatabasicdemo.models.Brand;
+import com.example.springdatabasicdemo.dtos.car.*;
 import com.example.springdatabasicdemo.models.Model;
+import com.example.springdatabasicdemo.repositories.BrandRepository;
 import com.example.springdatabasicdemo.repositories.ModelRepository;
-import com.example.springdatabasicdemo.services.BrandService;
+import com.example.springdatabasicdemo.repositories.OfferRepository;
 import com.example.springdatabasicdemo.services.ModelService;
-import com.example.springdatabasicdemo.dtos.car.ShowAllCarsDto;
 import com.example.springdatabasicdemo.util.ValidationUtil;
-import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +19,14 @@ import java.util.stream.Collectors;
 public class ModelServiceImpl implements ModelService {
 
     private ModelRepository modelRepository;
-    private BrandService brandService;
+    private BrandRepository brandRepository;
+
+    private final OfferRepository offerRepository;
     private final ValidationUtil validationUtil;
     private final ModelMapper modelMapper;
 
-    public ModelServiceImpl(ValidationUtil validationUtil, ModelMapper modelMapper) {
+    public ModelServiceImpl(OfferRepository offerRepository, ValidationUtil validationUtil, ModelMapper modelMapper) {
+        this.offerRepository = offerRepository;
         this.validationUtil = validationUtil;
         this.modelMapper = modelMapper;
     }
@@ -41,19 +39,19 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public void addModel(AddCarDto addCarDto) {
-        if (!this.validationUtil.isValid(addCarDto)) {
-
-            this.validationUtil
-                .violations(addCarDto)
-                .stream()
-                .map(ConstraintViolation::getMessage)
-                .forEach(System.out::println);
-
-            throw new IllegalArgumentException("Illegal arguments!");
-        }
+//        if (!this.validationUtil.isValid(addCarDto)) {
+//
+//            this.validationUtil
+//                .violations(addCarDto)
+//                .stream()
+//                .map(ConstraintViolation::getMessage)
+//                .forEach(System.out::println);
+//
+//            throw new IllegalArgumentException("Illegal arguments!");
+//        }
 
         Model model = this.modelMapper.map(addCarDto, Model.class);
-        model.setBrand(modelMapper.map(brandService.create(new BrandDto(addCarDto.getBrandName())), Brand.class));
+        System.out.println(brandRepository.findByName(addCarDto.getBrandName()));
 
         this.modelRepository.saveAndFlush(model);
 
@@ -89,13 +87,22 @@ public class ModelServiceImpl implements ModelService {
         return modelMapper.map(modelRepository.findByName(name).orElse(null), CarDetailsDto.class);
     }
 
+    @Override
+    public List<ModelWithPriceDto> findAllByBrand(String name) {
+        return modelRepository.findAllByBrand(brandRepository.findByName(name))
+            .stream()
+            .map(
+                (s) -> modelMapper.map(s, ModelWithPriceDto.class))
+            .collect(Collectors.toList());
+    }
+
     @Autowired
     public void setModelRepository(ModelRepository modelRepository) {
         this.modelRepository = modelRepository;
     }
 
     @Autowired
-    public void setBrandRepository(BrandService brandService) {
-        this.brandService = brandService;
+    public void setBrandRepository(BrandRepository brandRepository) {
+        this.brandRepository = brandRepository;
     }
 }

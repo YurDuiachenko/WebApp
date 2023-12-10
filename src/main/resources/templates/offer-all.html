@@ -2,33 +2,45 @@
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
 <main class="flex-shrink-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="jumbotron text-center rounded align-self-center pt-5">
-                <h2 class="text-center text-dark mt-5">Offers</h2>
-                <div class="row row-cols-1 row-cols-md-4 g-3">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Model</th>
-                            <th scope="col">Seller</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Milleage</th>
-                            <th scope="col">Year</th>
-                            <th scope="col">Details</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="o : ${offers}">
-                            <td th:text="${o.modelName}"></td>
-                            <td th:text="${o.sellerLastName}"></td>
-                            <td th:text="${o.price}"></td>
-                            <td th:text="${o.mileage}"></td>
-                            <td th:text="${o.year}"></td>
-                            <td><a class="btn-primary" th:href="@{/offers/offer-details/{offer-id}(offer-id=${o.id})}">Details</a></td></tr>
-                        </tbody>
-                    </table>
+    <div class="bg-image "
+         style="
+         background-image:
+         url('https://images.unsplash.com/photo-1487424439918-bc6b5bef0380?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          height: 100%;
+          min-height: 600px;
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="jumbotron text-center rounded align-self-center">
+                    <h2 class="text-center text-dark mt-5">Offers</h2>
+                    <div class="row row-cols-1 row-cols-md-4 g-3">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Model</th>
+                                <th scope="col">Seller</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Milleage</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="o : ${offers}">
+                                <td th:text="${o.modelName}"></td>
+                                <td th:text="${o.sellerLastName}"></td>
+                                <td th:text="${o.price}"></td>
+                                <td th:text="${o.mileage}"></td>
+                                <td th:text="${o.year}"></td>
+                                <td><a class="btn-primary" th:href="@{/offers/offer-details/{offer-id}(offer-id=${o.id})}">Details</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

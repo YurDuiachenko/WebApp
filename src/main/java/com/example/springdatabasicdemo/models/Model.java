@@ -10,10 +10,10 @@ import java.util.Set;
 @Entity
 @Table(name = "models")
 public class Model extends BaseEntity {
-
     private String name;
     private Category category;
     private String imageURL;
+    private double price;
     private int startYear;
     private int endYear;
     private Brand brand;
@@ -41,6 +41,27 @@ public class Model extends BaseEntity {
         this.brand = brand;
     }
 
+    public Model(String name, Category category, String imageURL, double price, int startYear, int endYear, Brand brand, Set<Offer> offers) {
+        this.name = name;
+        this.category = category;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.brand = brand;
+        this.offers = offers;
+    }
+
+    public Model(String name, Category category, String imageURL, double price, int startYear, int endYear, Brand brand) {
+        this.name = name;
+        this.category = category;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.brand = brand;
+    }
+
     @Column(name = "name", length = 255)
     public String getName() {
         return name;
@@ -56,6 +77,12 @@ public class Model extends BaseEntity {
     public String getImageURL() {
         return imageURL;
     }
+
+    @Column(name = "price")
+    public double getPrice() {
+        return price;
+    }
+
     @Column(name = "start_year")
     public int getStartYear() {
         return startYear;
@@ -66,8 +93,8 @@ public class Model extends BaseEntity {
         return endYear;
     }
 
-    @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.REFRESH)
+    @ManyToOne(optional = true)
+    @Cascade({org.hibernate.annotations.CascadeType.REFRESH})
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     public Brand getBrand() {
         return brand;
@@ -88,6 +115,10 @@ public class Model extends BaseEntity {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setStartYear(int startYear) {

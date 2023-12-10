@@ -7,12 +7,14 @@ public class ShowAllCarsDto {
     private  String name;
     private  Category category;
     private  String imageURL;
+    private double price;
     private BrandDto brand;
 
-    public ShowAllCarsDto(String name, Category category, String imageURL, BrandDto brand) {
+    public ShowAllCarsDto(String name, Category category, String imageURL, double price, BrandDto brand) {
         this.name = name;
         this.category = category;
         this.imageURL = imageURL;
+        this.price = price;
         this.brand = brand;
     }
 
@@ -41,6 +43,14 @@ public class ShowAllCarsDto {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public BrandDto getBrand() {

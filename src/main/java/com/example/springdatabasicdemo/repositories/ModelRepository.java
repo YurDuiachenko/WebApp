@@ -1,8 +1,10 @@
 package com.example.springdatabasicdemo.repositories;
+import com.example.springdatabasicdemo.models.Brand;
 import com.example.springdatabasicdemo.models.Model;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,4 +13,5 @@ public interface ModelRepository extends JpaRepository <Model, UUID> {
 
     Optional<Model> findByName(String name);
 
+    List<Model> findAllByBrand(Brand brand);
 }
