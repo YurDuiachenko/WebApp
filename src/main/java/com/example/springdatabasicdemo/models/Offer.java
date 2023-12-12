@@ -18,7 +18,7 @@ public class Offer extends BaseEntity {
     private Transmission transmission;
     private int year;
     private Model model;
-    private User seller;
+    private Users seller;
 
     public Offer() {
     }
@@ -34,7 +34,7 @@ public class Offer extends BaseEntity {
             Date created,
             Date modified,
             Model model,
-            User seller
+            Users seller
     ) {
         super.created = created;
         super.modified = modified;
@@ -49,7 +49,7 @@ public class Offer extends BaseEntity {
         this.seller = seller;
     }
 
-    public Offer(String description, Engine engine, String imageUrl, int mileage, int price, Transmission transmission, int year, Model model, User seller) {
+    public Offer(String description, Engine engine, String imageUrl, int mileage, int price, Transmission transmission, int year, Model model, Users seller) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -106,7 +106,7 @@ public class Offer extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    public User getSeller() {
+    public Users getSeller() {
         return seller;
     }
 
@@ -142,7 +142,7 @@ public class Offer extends BaseEntity {
         this.model = model;
     }
 
-    public void setSeller(User seller) {
+    public void setSeller(Users seller) {
         this.seller = seller;
     }
 

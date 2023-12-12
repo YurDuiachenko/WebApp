@@ -1,16 +1,15 @@
 package com.example.springdatabasicdemo.services.impl;
 
-import com.example.springdatabasicdemo.dtos.car.CarDetailsDto;
 import com.example.springdatabasicdemo.dtos.offer.OfferDetailsDto;
 import com.example.springdatabasicdemo.dtos.offer.OfferDto;
 import com.example.springdatabasicdemo.dtos.offer.ShowAllOffersDto;
 import com.example.springdatabasicdemo.models.Model;
 import com.example.springdatabasicdemo.models.Offer;
-import com.example.springdatabasicdemo.models.User;
+import com.example.springdatabasicdemo.models.Users;
 import com.example.springdatabasicdemo.repositories.OfferRepository;
 import com.example.springdatabasicdemo.services.ModelService;
 import com.example.springdatabasicdemo.services.OfferService;
-import com.example.springdatabasicdemo.services.UserService;
+import com.example.springdatabasicdemo.services.UsersService;
 import com.example.springdatabasicdemo.util.ValidationUtil;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
@@ -26,7 +25,7 @@ public class OfferServiceImpl implements OfferService {
 
     private OfferRepository offerRepository;
     private ModelService modelService;
-    private UserService userService;
+    private UsersService usersService;
     private final ValidationUtil validationUtil;
     private final ModelMapper modelMapper;
 
@@ -56,7 +55,7 @@ public class OfferServiceImpl implements OfferService {
 
         Offer offer = this.modelMapper.map(offerDto, Offer.class);
         offer.setModel(modelMapper.map(modelService.create(offerDto.getModel()), Model.class));
-        offer.setSeller(modelMapper.map(userService.create(offerDto.getSeller()), User.class));
+        offer.setSeller(modelMapper.map(usersService.create(offerDto.getSeller()), Users.class));
         
         this.offerRepository.saveAndFlush(offer);
     }
@@ -98,7 +97,7 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserService(UsersService usersService) {
+        this.usersService = usersService;
     }
 }

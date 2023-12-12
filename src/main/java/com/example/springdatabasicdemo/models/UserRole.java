@@ -15,10 +15,14 @@ import java.util.Set;
 public class UserRole extends BaseEntity {
 
     private Role role;
-    private Set<User> users = new HashSet<>();
+    private Set<Users> users = new HashSet<>();
+
+    public UserRole(Role role) {
+        this.role = role;
+    }
 
     public UserRole() {}
-    public UserRole(Role role, Set<User> users) {
+    public UserRole(Role role, Set<Users> users) {
         this.role = role;
         this.users = users;
     }
@@ -36,7 +40,7 @@ public class UserRole extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
     @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    public Set<User> getUsers() {
+    public Set<Users> getUsers() {
         return users;
     }
 
@@ -44,7 +48,7 @@ public class UserRole extends BaseEntity {
         this.role = role;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<Users> users) {
         this.users = users;
     }
 }

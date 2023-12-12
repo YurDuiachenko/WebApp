@@ -7,20 +7,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
-
+public class Users extends BaseEntity {
     private String username;
     private String password;
     private String firstName;
     private String lastName;
+    private String email;
     private boolean isActive;
     private String imageUrl;
     private UserRole role;
     private Set<Offer> offers = new HashSet<>();
 
-    public User() {}
+    public Users() {}
 
-    public User(String username, String password, String firstName, String lastName, boolean isActive, String imageUrl, UserRole role, Set<Offer> offers) {
+    public Users(String username, String password, String firstName, String lastName, boolean isActive, String imageUrl, UserRole role, Set<Offer> offers) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -31,7 +31,7 @@ public class User extends BaseEntity {
         this.offers = offers;
     }
 
-    public User(String username, String password, String firstName, String lastName, boolean isActive, String imageUrl, UserRole role) {
+    public Users(String username, String password, String firstName, String lastName, boolean isActive, String imageUrl, UserRole role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -39,6 +39,14 @@ public class User extends BaseEntity {
         this.isActive = isActive;
         this.imageUrl = imageUrl;
         this.role = role;
+    }
+
+    public Users(String username, String password, String email) {
+        this();
+
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     @Column(name = "username")
@@ -59,6 +67,10 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     public String getLastName() {
         return lastName;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Column(name = "is_active")
@@ -96,6 +108,10 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setActive(boolean active) {
         isActive = active;
     }
@@ -111,4 +127,16 @@ public class User extends BaseEntity {
         this.offers = offers;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+            "username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", isActive=" + isActive +
+            ", imageUrl='" + imageUrl + '\'' +
+            '}';
+    }
 }

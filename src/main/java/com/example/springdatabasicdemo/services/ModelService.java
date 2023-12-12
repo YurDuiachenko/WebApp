@@ -13,6 +13,8 @@ public interface ModelService {
 
     void addModel(AddCarDto addCarDto);
 
+    void updateModel(String modelName, AddCarDto addCarDto);
+
     void destroy(ModelDto t);
 
     void destroyById(UUID id);

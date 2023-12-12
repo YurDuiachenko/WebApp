@@ -7,6 +7,7 @@ import com.example.springdatabasicdemo.repositories.ModelRepository;
 import com.example.springdatabasicdemo.services.BrandService;
 import com.example.springdatabasicdemo.services.ModelService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,11 @@ public class ModelController {
     private ModelService modelService;
     private ModelRepository modelRepository;
     private BrandService brandService;
+    private final ModelMapper modelMapper;
+
+    public ModelController(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/all")
     public String all(Model model) {
@@ -70,8 +76,8 @@ public class ModelController {
     }
 
     @ModelAttribute("carModel")
-    public ModelDto init(){
-        return new ModelDto();
+    public AddCarDto init(){
+        return new AddCarDto();
     }
 
     @PostMapping("/add")
@@ -79,15 +85,40 @@ public class ModelController {
         BindingResult bindingResult,
         RedirectAttributes redirectAttributes) {
 
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("carModel", carModel);
-//            redirectAttributes
-//                .addFlashAttribute("org.springframework.validation.BindingResult.carModel",
-//                bindingResult);
-//            return "redirect:/models/add";
-//        }
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("carModel", carModel);
+            redirectAttributes
+                .addFlashAttribute("org.springframework.validation.BindingResult.carModel",
+                bindingResult);
+            return "redirect:/models/add";
+        }
         modelService.addModel(carModel);
 
+        return "redirect:/models/all";
+    }
+
+    @GetMapping("/update/{modelName}")
+    public String updateModel(@PathVariable("modelName") String modelName, Model model) {
+        System.out.println(111);
+        com.example.springdatabasicdemo.models.Model modela = modelRepository.findByName(modelName).get();
+        model.addAttribute("model", modela);
+        model.addAttribute("brands", brandService.getAll());
+        model.addAttribute("updateModel", modelMapper.map(modela, AddCarDto.class));
+        return "model-update";
+    }
+
+    @PostMapping("/update/{modelName}")
+    public String updateModel(@PathVariable("modelName") String modelName, @Valid AddCarDto addCarDto,
+        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        System.out.println(24324);
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("updateUserModel", addCarDto);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.updateUserModel",
+//                bindingResult);
+//            return "redirect:/models/update/" + modelName;
+//        }
+        modelService.addModel(addCarDto);
+//        modelService.updateModel(modelName, addCarDto);
         return "redirect:/models/all";
     }
 

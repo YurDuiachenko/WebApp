@@ -21,17 +21,24 @@
                         <h1 th:text="${carDetails.brandName} + ' ' + ${carDetails.name}">Car Details</h1>
                     </div>
                     <div class="row bg-light rounded" style="width: min-content; margin-bottom: 20px">
-                        <div class="col-md-6" style=" margin-top: 10px">
+                        <div class="col-md-6" style="margin-top: 10px">
                             <img height="350px" th:src="${carDetails.imageURL}"></div>
-                        <div class="col-md-6 pt-3" style="margin: 10px;">
+                        <div class="col-md-6 pt-3" style="margin: 0px 10px 10px;">
                             <h3 th:text="Details"></h3>
                             <h5 th:text="'Brand: ' + ${carDetails.brandName}"></h5>
                             <h5 th:text="'Model: ' + ${carDetails.name}"></h5>
                             <h5 th:text="'Years: ' + ${carDetails.startYear} + ' - ' + ${carDetails.endYear}"></h5>
                             <h5 th:text="'Types: ' + ${carDetails.category}"></h5>
-                            <div class="align-bottom"><a class="btn btn-danger align-bottom"
-                                                         style="background-color: #5a624f"
-                                                         th:href="@{/models/model-delete/{model-name}(model-name=${carDetails.name})}">Delete</a>
+                            <div class="align-bottom">
+                                <a class="col btn btn-danger align-bottom"
+                                   style="background-color: #5a624f; border-color: white; width: 70px"
+                                >Buy</a>
+                                <a class="col btn btn-danger align-bottom"
+                                   style="background-color: #3a5960; border-color: white; width: 70px"
+                                   th:href="@{/models/model-delete/{model-name}(model-name=${carDetails.name})}">Delete</a>
+                                <a class="col btn btn-danger align-bottom"
+                                   style="background-color: #98b5c4; border-color: white; width: 70px"
+                                   th:href="@{/models/update/{modelName}(modelName=${carDetails.name})}">Edit</a>
                             </div>
                         </div>
                     </div>

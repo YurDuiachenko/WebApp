@@ -19,26 +19,32 @@
                 <div class="col-md-2"></div>
                 <div class="jumbotron text-center rounded col-md-8 align-self-center">
                     <div class="justify-content-center text-center">
-                        <h1>Add Car</h1>
+                        <h1>Edit Car</h1>
                     </div>
                     <form class="m-md-auto w-75 pb-3"
-                          th:action="@{/models/add}"
+                          th:action="@{/models/update}"
                           th:method="post"
-                          th:object="${carModel}">
+                          th:object="${updateModel}">
 
                         <div class="mb-3">
                             <input aria-describedby="nameHelp"
                                    placeholder="Model name"
                                    class="form-control text-center"
-                                   id="name" name="name" th:errorclass="is-invalid" th:field="*{name}"
+                                   id="name" name="name"
+                                   th:errorclass="is-invalid"
+                                   th:field="*{name}"
                                    type="text"/>
                             <small class="text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Error message</small>
                         </div>
                         <div class="mb-3">
-                            <select class="form-control text-center" id="brand"
-                                    multiple="false" name="name" th:field="*{brandName}">
+                            <select class="form-control text-center"
+                                    id="brand"
+                                    multiple="false"
+                                    name="name"
+                                    th:field="*{brandName}">
                                 <option th:each="b : ${brands}"
                                         th:text="${b.name}"
+                                        th:selected="${model.brand.name}"
                                         th:value="${b.name}">Brand name
                                 </option>
                             </select>
@@ -91,8 +97,11 @@
                                    class="form-control text-center"
                                    placeholder="Image URL"
                                    id="imageURL" name="imageURL"
-                                   th:errorclass="is-invalid" th:field="*{imageURL}" type="text"/>
-                            <small class="text-danger" th:errors="*{imageURL}"
+                                   th:errorclass="is-invalid"
+                                   th:field="*{imageURL}"
+                                   type="text"/>
+                            <small class="text-danger"
+                                   th:errors="*{imageURL}"
                                    th:if="${#fields.hasErrors('imageURL')}">Error message</small>
                         </div>
 
@@ -100,8 +109,11 @@
                             <input aria-describedby="price"
                                    class="form-control text-center"
                                    placeholder="Price"
-                                   id="price" name="imageURL"
-                                   th:errorclass="is-invalid" th:field="*{price}" type="text"/>
+                                   id="price"
+                                   name="imageURL"
+                                   th:errorclass="is-invalid"
+                                   th:value="*{price}"
+                                   type="text">
                             <small class="text-danger" th:errors="*{price}"
                                    th:if="${#fields.hasErrors('price')}">Error message</small>
                         </div>
@@ -110,8 +122,11 @@
                             <input aria-describedby="startYear"
                                    class="form-control text-center"
                                    placeholder="Start year"
-                                   id="startYear" name="startYear"
-                                   th:errorclass="is-invalid" th:field="*{startYear}" type="text"/>
+                                   id="startYear"
+                                   name="startYear"
+                                   th:errorclass="is-invalid"
+                                   th:field="*{startYear}"
+                                   type="text"/>
                             <small class="text-danger" th:errors="*{startYear}"
                                    th:if="${#fields.hasErrors('startYear')}">Error message</small>
                         </div>
@@ -120,15 +135,18 @@
                             <input aria-describedby="endYear"
                                    class="form-control text-center"
                                    placeholder="End year"
-                                   id="endYear" name="endYear"
-                                   th:errorclass="is-invalid" th:field="*{endYear}" type="text"/>
+                                   id="endYear"
+                                   name="endYear"
+                                   th:errorclass="is-invalid"
+                                   th:field="*{endYear}"
+                                   type="text"/>
                             <small class="text-danger" th:errors="*{endYear}"
                                    th:if="${#fields.hasErrors('endYear')}">Error message</small>
                         </div>
 
-                        <button class="btn btn-secondary" type="submit"
-                                style="background-color: #5a624f; border-color: white; width: 70px">Add</button>
-
+                        <button class="btn btn-secondary"
+                                type="submit"
+                                style="background-color: #5a624f; border-color: white; width: 70px">Save</button>
                     </form>
                 </div>
             </div>

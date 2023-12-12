@@ -12,7 +12,8 @@ public class AddCarDto {
 //    @UniqueModelName
     private  String name;
     private Category category;
-    private  String imageURL;
+    private String imageURL;
+    private double price;
     private  int startYear;
     private  int endYear;
 
@@ -51,6 +52,14 @@ public class AddCarDto {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getStartYear() {

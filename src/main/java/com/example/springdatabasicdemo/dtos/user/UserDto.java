@@ -17,6 +17,7 @@ public  class UserDto {
     private  String lastName;
     private  boolean isActive;
     private  String imageUrl;
+    private String email;
     private  Date created;
     private  Date modified;
     private UserRoleDto role;
@@ -29,6 +30,7 @@ public  class UserDto {
             String lastName,
             boolean isActive,
             String imageUrl,
+            String email,
             Date created,
             Date modified,
             UserRoleDto role
@@ -40,6 +42,7 @@ public  class UserDto {
         this.lastName = lastName;
         this.isActive = isActive;
         this.imageUrl = imageUrl;
+        this.email = email;
         this.created = created;
         this.modified = modified;
         this.role = role;
@@ -52,6 +55,20 @@ public  class UserDto {
         this.lastName = lastName;
         this.isActive = isActive;
         this.imageUrl = imageUrl;
+        this.created = created;
+        this.modified = modified;
+        this.role = role;
+    }
+
+    public UserDto(String username, String password, String firstName, String lastName, boolean isActive, String imageUrl, String email, Date created,
+        Date modified, UserRoleDto role) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isActive = isActive;
+        this.imageUrl = imageUrl;
+        this.email = email;
         this.created = created;
         this.modified = modified;
         this.role = role;

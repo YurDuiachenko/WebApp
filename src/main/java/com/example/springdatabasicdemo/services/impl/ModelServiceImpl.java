@@ -1,12 +1,14 @@
 package com.example.springdatabasicdemo.services.impl;
 
 import com.example.springdatabasicdemo.dtos.car.*;
+import com.example.springdatabasicdemo.models.Brand;
 import com.example.springdatabasicdemo.models.Model;
 import com.example.springdatabasicdemo.repositories.BrandRepository;
 import com.example.springdatabasicdemo.repositories.ModelRepository;
 import com.example.springdatabasicdemo.repositories.OfferRepository;
 import com.example.springdatabasicdemo.services.ModelService;
 import com.example.springdatabasicdemo.util.ValidationUtil;
+import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,22 +41,31 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public void addModel(AddCarDto addCarDto) {
-//        if (!this.validationUtil.isValid(addCarDto)) {
-//
-//            this.validationUtil
-//                .violations(addCarDto)
-//                .stream()
-//                .map(ConstraintViolation::getMessage)
-//                .forEach(System.out::println);
-//
-//            throw new IllegalArgumentException("Illegal arguments!");
-//        }
+        if (!this.validationUtil.isValid(addCarDto)) {
+
+            this.validationUtil
+                .violations(addCarDto)
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .forEach(System.out::println);
+
+            throw new IllegalArgumentException("Illegal arguments!");
+        }
 
         Model model = this.modelMapper.map(addCarDto, Model.class);
-        System.out.println(brandRepository.findByName(addCarDto.getBrandName()));
+        Brand brand = brandRepository.findByName(addCarDto.getBrandName());
+        brand = brandRepository.save(brand);
+        model.setBrand(brand);
 
         this.modelRepository.saveAndFlush(model);
 
+    }
+
+    @Override
+    public void updateModel(String modelName, AddCarDto addCarDto) {
+        Model model = modelRepository.findByName(modelName).get();
+        model = (modelMapper.map(addCarDto, Model.class));
+        modelRepository.saveAndFlush(model);
     }
 
     @Override
