@@ -7,6 +7,9 @@ import com.example.springdatabasicdemo.repositories.ModelRepository;
 import com.example.springdatabasicdemo.services.BrandService;
 import com.example.springdatabasicdemo.services.ModelService;
 import jakarta.validation.Valid;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,7 @@ public class ModelController {
     private ModelRepository modelRepository;
     private BrandService brandService;
     private final ModelMapper modelMapper;
+    private static final Logger LOG = LogManager.getLogger(Controller.class);
 
     public ModelController(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
@@ -35,6 +39,7 @@ public class ModelController {
 
     @GetMapping("/all")
     public String all(Model model) {
+        LOG.log(Level.INFO, "Show all models for - ");
         model.addAttribute("models", modelService.getAll());
 
         return "models-all";
@@ -47,6 +52,7 @@ public class ModelController {
 
     @GetMapping("/model-details/{model-name}")
     public String carDetails(@PathVariable("model-name") String modelName, Model model) {
+        LOG.log(Level.INFO, "Show details of" + modelName);
         model.addAttribute("carDetails", modelService.modelDetails(modelName));
 
         return "models-details";

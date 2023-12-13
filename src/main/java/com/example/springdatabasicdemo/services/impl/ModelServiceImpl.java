@@ -11,15 +11,19 @@ import com.example.springdatabasicdemo.util.ValidationUtil;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 @Service
+@EnableCaching
 public class ModelServiceImpl implements ModelService {
-
     private ModelRepository modelRepository;
     private BrandRepository brandRepository;
 
@@ -39,6 +43,7 @@ public class ModelServiceImpl implements ModelService {
         return modelMapper.map(modelRepository.save(s), ModelDto.class);
     }
 
+    @CacheEvict(cacheNames = "models", allEntries = true)
     @Override
     public void addModel(AddCarDto addCarDto) {
         if (!this.validationUtil.isValid(addCarDto)) {
@@ -61,6 +66,7 @@ public class ModelServiceImpl implements ModelService {
 
     }
 
+    @CacheEvict(cacheNames = "models", allEntries = true)
     @Override
     public void updateModel(String modelName, AddCarDto addCarDto) {
         Model model = modelRepository.findByName(modelName).get();
@@ -83,7 +89,9 @@ public class ModelServiceImpl implements ModelService {
         return Optional.ofNullable(modelMapper.map(modelRepository.findById(id), ModelDto.class));
     }
 
+
     @Override
+    @Cacheable("models")
     public List<ShowAllCarsDto> getAll() {
         return modelRepository.findAll()
             .stream()
@@ -98,6 +106,7 @@ public class ModelServiceImpl implements ModelService {
         return modelMapper.map(modelRepository.findByName(name).orElse(null), CarDetailsDto.class);
     }
 
+    @Cacheable("homepage")
     @Override
     public List<ModelWithPriceDto> findAllByBrand(String name) {
         return modelRepository.findAllByBrand(brandRepository.findByName(name))
