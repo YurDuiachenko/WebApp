@@ -14,6 +14,9 @@ import com.example.springdatabasicdemo.util.ValidationUtil;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 @Service
+@EnableCaching
 public class OfferServiceImpl implements OfferService {
 
     private OfferRepository offerRepository;
@@ -40,6 +44,7 @@ public class OfferServiceImpl implements OfferService {
         return modelMapper.map(offerRepository.save(s), OfferDto.class);
     }
 
+    @CacheEvict(value = "offers", allEntries = true)
     @Override
     public void addOffer(OfferDto offerDto) {
         if (!this.validationUtil.isValid(offerDto)) {
@@ -75,6 +80,7 @@ public class OfferServiceImpl implements OfferService {
         return Optional.ofNullable(modelMapper.map(offerRepository.findById(id), OfferDto.class));
     }
 
+    @Cacheable("offers")
     @Override
     public List<ShowAllOffersDto> getAll() {
         return offerRepository.findAll().stream().map((s) -> modelMapper.map(s, ShowAllOffersDto.class)).collect(Collectors.toList());

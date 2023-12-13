@@ -32,7 +32,7 @@
                             <div class="align-bottom">
                                 <a class="col btn btn-danger align-bottom"
                                    style="background-color: #5a624f; border-color: white; width: 70px"
-                                >Buy</a>
+                                   th:href="@{/offers/add/{model-name}(model-name=${carDetails.name})}">Buy</a>
                                 <a class="col btn btn-danger align-bottom"
                                    style="background-color: #3a5960; border-color: white; width: 70px"
                                    th:href="@{/models/model-delete/{model-name}(model-name=${carDetails.name})}">Delete</a>

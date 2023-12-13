@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="bg-image "
+         style="
+         background-image:
+         url('https://images.unsplash.com/photo-1487424439918-bc6b5bef0380?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          height: 100%;
+          min-height: 600px;
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover; padding-bottom: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                    <div class="justify-content-center">
+                        <h1>Login</h1>
+                    </div>
+                    <form class="m-md-auto w-50 pb-3"
+                          th:action="@{/users/login}"
+                          th:method="post">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Name</label>
+                            <input aria-describedby="userNameHelp"
+                                   class="form-control text-center"
+                                   id="username"
+                                   name="username" th:value="${userName}" type="text"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input aria-describedby="passwordHelp"
+                                   class="form-control text-center"
+                                   id="password" name="password" type="password"/>
+                        </div>
+
+                        <p class="text-danger" th:if="${badCredentials}">
+                            Invalid username or password.
+                        </p>
+
+                        <button class="btn btn-secondary"
+                                style="background-color: #98b5c4; border-color: white; width: 70px"
+                                type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

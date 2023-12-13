@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,8 +39,8 @@ public class ModelController {
     }
 
     @GetMapping("/all")
-    public String all(Model model) {
-        LOG.log(Level.INFO, "Show all models for - ");
+    public String all(Model model, Principal principal) {
+        LOG.log(Level.INFO, "Show all models for - " + principal.getName());
         model.addAttribute("models", modelService.getAll());
 
         return "models-all";
@@ -51,8 +52,8 @@ public class ModelController {
     }
 
     @GetMapping("/model-details/{model-name}")
-    public String carDetails(@PathVariable("model-name") String modelName, Model model) {
-        LOG.log(Level.INFO, "Show details of" + modelName);
+    public String carDetails(@PathVariable("model-name") String modelName, Model model, Principal principal) {
+        LOG.log(Level.INFO, "Show details of" + modelName + " for " + principal.getName());
         model.addAttribute("carDetails", modelService.modelDetails(modelName));
 
         return "models-details";
@@ -75,7 +76,8 @@ public class ModelController {
     }
 
     @GetMapping("/model-delete/{model-name}")
-    public String deleteCar(@PathVariable("model-name") String modelName) {
+    public String deleteCar(@PathVariable("model-name") String modelName, Principal principal) {
+        LOG.log(Level.INFO,  principal.getName() + " deleted " + modelName);
         modelService.destroyById(modelRepository.findByName(modelName).get().id);
 
         return "redirect:/models/all";
@@ -89,7 +91,8 @@ public class ModelController {
     @PostMapping("/add")
     public String addCar(@Valid AddCarDto carModel,
         BindingResult bindingResult,
-        RedirectAttributes redirectAttributes) {
+        RedirectAttributes redirectAttributes,
+        Principal principal) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("carModel", carModel);
@@ -99,24 +102,24 @@ public class ModelController {
             return "redirect:/models/add";
         }
         modelService.addModel(carModel);
-
+        LOG.log(Level.INFO,  principal.getName() + " add new car: " + carModel.getName());
         return "redirect:/models/all";
     }
 
     @GetMapping("/update/{modelName}")
-    public String updateModel(@PathVariable("modelName") String modelName, Model model) {
-        System.out.println(111);
+    public String updateModel(@PathVariable("modelName") String modelName, Model model, Principal principal) {
+
         com.example.springdatabasicdemo.models.Model modela = modelRepository.findByName(modelName).get();
         model.addAttribute("model", modela);
         model.addAttribute("brands", brandService.getAll());
         model.addAttribute("updateModel", modelMapper.map(modela, AddCarDto.class));
+        LOG.log(Level.INFO,  principal.getName() + " updated new car: " + modelName);
         return "model-update";
     }
 
     @PostMapping("/update/{modelName}")
     public String updateModel(@PathVariable("modelName") String modelName, @Valid AddCarDto addCarDto,
         BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        System.out.println(24324);
 //        if (bindingResult.hasErrors()) {
 //            redirectAttributes.addFlashAttribute("updateUserModel", addCarDto);
 //            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.updateUserModel",

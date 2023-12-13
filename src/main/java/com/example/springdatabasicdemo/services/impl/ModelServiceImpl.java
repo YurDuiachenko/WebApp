@@ -116,6 +116,11 @@ public class ModelServiceImpl implements ModelService {
             .collect(Collectors.toList());
     }
 
+    @Override
+    public ModelDto map(Model model) {
+        return modelMapper.map(model, ModelDto.class);
+    }
+
     @Autowired
     public void setModelRepository(ModelRepository modelRepository) {
         this.modelRepository = modelRepository;

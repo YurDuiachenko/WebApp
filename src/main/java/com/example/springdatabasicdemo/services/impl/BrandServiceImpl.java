@@ -8,6 +8,8 @@ import com.example.springdatabasicdemo.util.ValidationUtil;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 @Service
+@EnableCaching
 public class BrandServiceImpl implements BrandService {
 
     private BrandRepository brandRepository;
@@ -76,6 +79,7 @@ public class BrandServiceImpl implements BrandService {
         return Optional.ofNullable(modelMapper.map(brandRepository.findById(id), BrandDto.class));
     }
 
+    @Cacheable("brands")
     @Override
     public List<BrandDto> getAll() {
         return brandRepository.findAll().stream().map((s) -> modelMapper.map(s, BrandDto.class)).collect(Collectors.toList());

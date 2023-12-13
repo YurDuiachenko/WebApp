@@ -2,6 +2,7 @@ package com.example.springdatabasicdemo.services;
 
 
 import com.example.springdatabasicdemo.dtos.car.*;
+import com.example.springdatabasicdemo.models.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +27,6 @@ public interface ModelService {
     CarDetailsDto modelDetails(String name);
 
     List<ModelWithPriceDto> findAllByBrand(String name);
+
+    ModelDto map(Model model);
 }

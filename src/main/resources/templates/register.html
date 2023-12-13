@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="bg-image "
+         style="
+         background-image:
+         url('https://images.unsplash.com/photo-1487424439918-bc6b5bef0380?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          height: 100%;
+          min-height: 600px;
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover; padding-bottom: 10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                    <div class="justify-content-center">
+                        <h1>Register</h1>
+                    </div>
+                    <form class="m-md-auto w-50 pb-3"
+                          th:action="@{/users/register}"
+                          th:method="post"
+                          th:object="${userRegistrationDto}">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input aria-describedby="userNameHelp"
+                                   class="form-control text-center"
+                                   id="userName" name="username" th:errorclass="is-invalid" th:field="*{userName}"
+                                   type="text"/>
+                            <small class="text-danger" th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}">Error
+                                message</small>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input aria-describedby="email"
+                                   class="form-control text-center"
+                                   id="email" name="email"
+                                   th:errorclass="is-invalid" th:field="*{email}" type="email"/>
+                            <small class="text-danger" th:errors="*{email}"
+                                   th:if="${#fields.hasErrors('email')}">Error
+                                message</small>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input aria-describedby="password"
+                                   class="form-control text-center" id="password" maxlength="20"
+                                   min="0"
+                                   minlength="5" name="password" required
+                                   th:errorclass="is-invalid" th:field="*{password}" type="password"/>
+                            <small class="text-danger" th:errors="*{password}"
+                                   th:if="${#fields.hasErrors('password')}">Error
+                                message</small>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="confirmPassword">Confirm password</label>
+                            <input aria-describedby="confirmPassword"
+                                   class="form-control text-center" id="confirmPassword" maxlength="20"
+                                   min="0"
+                                   minlength="5" name="confirmPassword" required
+                                   th:errorclass="is-invalid" th:field="*{confirmPassword}" type="password"/>
+                            <small class="text-danger" th:errors="*{confirmPassword}"
+                                   th:if="${#fields.hasErrors('confirmPassword')}">Error
+                                message</small>
+                        </div>
+
+                        <button class="btn btn-secondary"
+                                style="background-color: #98b5c4; border-color: white; width: 100px"
+                                type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
